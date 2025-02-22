@@ -42,6 +42,13 @@ prism mock openapi.yaml
 - lib/apiClient.ts
 - routes/
 
+## 5. 動作確認
+
+```shell
+npm run dev
+```
+- http://localhost:5173
+
 ⚙️
 
 - [openapi 3.0.0](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.0.md)
