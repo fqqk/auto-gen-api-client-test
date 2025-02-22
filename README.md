@@ -1,40 +1,49 @@
-# Welcome to Remix!
+# setup
 
-- 📖 [Remix docs](https://remix.run/docs)
-
-## Development
-
-Run the dev server:
-
-```shellscript
-npm run dev
+## 1. openapi仕様書をプロジェクトトップに配置
+```
+openapi.yaml
 ```
 
-## Deployment
+## 2. openapi-generatorを使用して、API Clientを作る準備をします。
 
-First, build your app for production:
-
-```sh
-npm run build
+オフィシャルのdocker-imageを使用。作業ディレクトリで以下コマンドを叩く。
+```shell
+docker run --rm \
+  -v "${PWD}:/local" \
+  openapitools/openapi-generator-cli:latest generate \
+  -i /local/openapi.yaml \
+  -g typescript-axios \
+  -o /local/generated-api \
+  --additional-properties=typescriptThreePlus=true,withInterfaces=true
 ```
 
-Then run the app in production mode:
+/generated-api が生成され、これで準備完了🎉
 
-```sh
-npm start
+## 3. prism を使用して opemapi.yaml から mock server を立ち上げます。
+```shell
+npm install -g @stoplight/prism-cli
+
+# OR
+
+yarn global add @stoplight/prism-cli
 ```
 
-Now you'll need to pick a host to deploy it to.
+```shell
+prism mock openapi.yaml
+```
 
-### DIY
+モックサーバーからダミーのユーザー情報が取得できるはずです。
+- http://127.0.0.1:4010/users
 
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
+## 4. apiClient を作成
 
-Make sure to deploy the output of `npm run build`
+以下ファイル参照
+- lib/apiClient.ts
+- routes/
 
-- `build/server`
-- `build/client`
+⚙️
 
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
+- [openapi 3.0.0](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.0.md)
+- [openapi-generator](https://github.com/OpenAPITools/openapi-generator)
+- [prism](https://github.com/stoplightio/prism)
