@@ -1,4 +1,4 @@
-import { Configuration, DefaultApi } from "generated-api";
+import { Configuration, DefaultApi } from "../../generated-api";
 
 const configuration = new Configuration({
   basePath: "http://localhost:8080",
