@@ -20,15 +20,12 @@ docker run --rm \
 
 /generated-api が生成され、これで準備完了🎉
 
-## 3. prism を使用して opemapi.yaml から mock server を立ち上げます。
+## 3. install package
 ```shell
-npm install -g @stoplight/prism-cli
-
-# OR
-
-yarn global add @stoplight/prism-cli
+npm install
 ```
 
+## 4. prism を使用して opemapi.yaml から mock server を立ち上げます。
 ```shell
 prism mock openapi.yaml
 ```
@@ -36,13 +33,13 @@ prism mock openapi.yaml
 モックサーバーからダミーのユーザー情報が取得できるはずです。
 - http://127.0.0.1:4010/users
 
-## 4. apiClient を作成
+## 5. apiClient を作成
 
 以下ファイル参照
 - lib/apiClient.ts
 - routes/
 
-## 5. 動作確認
+## 6. 動作確認
 
 ```shell
 npm run dev
